@@ -229,6 +229,19 @@ project/
 
 ---
 
-## License
+🌐 Live Demo
+
+You can access the realtime dashboard here:
+
+👉 https://unstamped-childless-cogwheel.ngrok-free.dev/
+
+⚠️ This demo is served via ngrok and may go offline if the tunnel is restarted.
+
+💡 Notes about the demo
+The dashboard streams live sensor data (not mock data)
+If the page shows no data:
+Sensors may not be connected
+Backend may not be running
+ngrok tunnel may have expired
 
 Add your preferred license here.
