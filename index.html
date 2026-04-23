@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Realtime Sensor Dashboard</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <h1>Simple Realtime Dashboard</h1>
+  <div class="small">Flex graphs are split into ACC, GYRO, and ANGLE. Polar stays on ACC in g.</div>
+
+  <div class="card hero-card" style="margin-bottom:16px;">
+    <div style="font-size:22px; font-weight:800;">Sensor Control Room</div>
+    <div class="small-line" style="margin-top:6px;">Realtime monitor for Polar + Flexible1 + Flexible2 with interactive chart toggles and CSV logging.</div>
+    <div class="status-chip-wrap">
+      <div class="chip"><span class="chip-dot"></span>Status: <span id="ready">WAITING</span></div>
+      <div class="chip"><span class="chip-dot"></span>HR: <span id="hr">-</span></div>
+      <div class="chip"><span class="chip-dot"></span>Updated: <span id="updated">-</span></div>
+    </div>
+  </div>
+
+  <div class="summary-grid">
+    <div class="summary-card polar-card">
+      <div class="section-tag">POLAR</div>
+      <h3>Polar <span class="badge" id="polar_status">-</span></h3>
+      <div class="metric-row">
+        <div class="metric"><div class="metric-title">ACC X (g)</div><div class="metric-value" id="px">-</div></div>
+        <div class="metric"><div class="metric-title">ACC Y (g)</div><div class="metric-value" id="py">-</div></div>
+        <div class="metric"><div class="metric-title">ACC Z (g)</div><div class="metric-value" id="pz">-</div></div>
+      </div>
+    </div>
+
+    <div class="summary-card f1-card">
+      <div class="section-tag">FLEX 1</div>
+      <h3>Flexible1 <span class="badge" id="f1_status">-</span></h3>
+      <div class="metric-row">
+        <div class="metric"><div class="metric-title">ACC X</div><div class="metric-value" id="f1_ax">-</div></div>
+        <div class="metric"><div class="metric-title">ACC Y</div><div class="metric-value" id="f1_ay">-</div></div>
+        <div class="metric"><div class="metric-title">ACC Z</div><div class="metric-value" id="f1_az">-</div></div>
+      </div>
+      <div class="metric-row">
+        <div class="metric"><div class="metric-title">GYRO X</div><div class="metric-value" id="f1_gx">-</div></div>
+        <div class="metric"><div class="metric-title">GYRO Y</div><div class="metric-value" id="f1_gy">-</div></div>
+        <div class="metric"><div class="metric-title">GYRO Z</div><div class="metric-value" id="f1_gz">-</div></div>
+      </div>
+      <div class="metric-row">
+        <div class="metric"><div class="metric-title">Angle X°</div><div class="metric-value" id="f1_anglex">-</div></div>
+        <div class="metric"><div class="metric-title">Angle Y°</div><div class="metric-value" id="f1_angley">-</div></div>
+        <div class="metric"><div class="metric-title">Gesture</div><div class="metric-value" id="f1_gesture">-</div></div>
+      </div>
+    </div>
+
+    <div class="summary-card f2-card">
+      <div class="section-tag">FLEX 2</div>
+      <h3>Flexible2 <span class="badge" id="f2_status">-</span></h3>
+      <div class="metric-row">
+        <div class="metric"><div class="metric-title">ACC X</div><div class="metric-value" id="f2_ax">-</div></div>
+        <div class="metric"><div class="metric-title">ACC Y</div><div class="metric-value" id="f2_ay">-</div></div>
+        <div class="metric"><div class="metric-title">ACC Z</div><div class="metric-value" id="f2_az">-</div></div>
+      </div>
+      <div class="metric-row">
+        <div class="metric"><div class="metric-title">GYRO X</div><div class="metric-value" id="f2_gx">-</div></div>
+        <div class="metric"><div class="metric-title">GYRO Y</div><div class="metric-value" id="f2_gy">-</div></div>
+        <div class="metric"><div class="metric-title">GYRO Z</div><div class="metric-value" id="f2_gz">-</div></div>
+      </div>
+      <div class="metric-row">
+        <div class="metric"><div class="metric-title">Angle X°</div><div class="metric-value" id="f2_anglex">-</div></div>
+        <div class="metric"><div class="metric-title">Angle Y°</div><div class="metric-value" id="f2_angley">-</div></div>
+        <div class="metric"><div class="metric-title">Gesture</div><div class="metric-value" id="f2_gesture">-</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chart-grid">
+    <div class="card chart-card"><h3>Flexible1 ACC Realtime Graph</h3><div class="legend-controls" id="f1AccLegendControls"></div><canvas id="f1AccChart" width="1200" height="420"></canvas></div>
+    <div class="card chart-card"><h3>Flexible1 GYRO Realtime Graph</h3><div class="legend-controls" id="f1GyroLegendControls"></div><canvas id="f1GyroChart" width="1200" height="420"></canvas></div>
+    <div class="card chart-card"><h3>Flexible1 ANGLE Realtime Graph</h3><div class="legend-controls" id="f1AngleLegendControls"></div><canvas id="f1AngleChart" width="1200" height="420"></canvas></div>
+    <div class="card chart-card"><h3>Flexible2 ACC Realtime Graph</h3><div class="legend-controls" id="f2AccLegendControls"></div><canvas id="f2AccChart" width="1200" height="420"></canvas></div>
+    <div class="card chart-card"><h3>Flexible2 GYRO Realtime Graph</h3><div class="legend-controls" id="f2GyroLegendControls"></div><canvas id="f2GyroChart" width="1200" height="420"></canvas></div>
+    <div class="card chart-card"><h3>Flexible2 ANGLE Realtime Graph</h3><div class="legend-controls" id="f2AngleLegendControls"></div><canvas id="f2AngleChart" width="1200" height="420"></canvas></div>
+    <div class="card chart-card"><h3>Polar ACC Realtime Graph</h3><div class="legend-controls" id="polarLegendControls"></div><canvas id="polarChart" width="1200" height="420"></canvas></div>
+  </div>
+
+  <h3>Live Log</h3>
+  <div class="log" id="log"></div>
+
+  <script src="/static/dashboard.js"></script>
+</body>
+</html>
